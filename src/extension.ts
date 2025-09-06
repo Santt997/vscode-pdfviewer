@@ -23,7 +23,7 @@ export function activate(context: vscode.ExtensionContext): void {
 
   // Comando para borrar página
   context.subscriptions.push(
-    vscode.commands.registerCommand('pdfviewer.deletePage', async () => {
+    vscode.commands.registerCommand('pdfviewer.deletePage', async (pageFromWebview?: number) => {
       const activeEditor = vscode.window.activeTextEditor;
       if (
         !activeEditor ||
@@ -32,24 +32,26 @@ export function activate(context: vscode.ExtensionContext): void {
         vscode.window.showErrorMessage('No hay un PDF activo.');
         return;
       }
-
-      const pageStr = await vscode.window.showInputBox({
-        prompt: '¿Qué página deseas borrar? (número, empezando desde 1)',
-      });
-      if (!pageStr) return;
-
-      const pageNum = parseInt(pageStr, 10);
-      if (isNaN(pageNum)) {
-        vscode.window.showErrorMessage('Número inválido.');
-        return;
+  
+      let pageNum = pageFromWebview;
+      if (!pageNum) {
+        const pageStr = await vscode.window.showInputBox({
+          prompt: '¿Qué página deseas borrar? (número, empezando desde 1)',
+        });
+        if (!pageStr) return;
+        pageNum = parseInt(pageStr, 10);
+        if (isNaN(pageNum)) {
+          vscode.window.showErrorMessage('Número inválido.');
+          return;
+        }
       }
-
+  
       const originalPath = activeEditor.document.fileName;
       const tempPath = path.join(
         path.dirname(originalPath),
         `.__tmp__${path.basename(originalPath)}`
       );
-
+  
       try {
         await deletePdfPage(originalPath, pageNum, tempPath);
         // Reemplaza el archivo original
@@ -64,6 +66,5 @@ export function activate(context: vscode.ExtensionContext): void {
       }
     })
   );
-}
 
 export function deactivate(): void {}
