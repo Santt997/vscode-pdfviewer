@@ -1,5 +1,3 @@
-import { promises as fsPromises } from 'fs';
-import { PDFDocument } from 'pdf-lib';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { Disposable } from './disposable';
@@ -15,7 +13,7 @@ export class PdfPreview extends Disposable {
 
   constructor(
     private readonly extensionRoot: vscode.Uri,
-    private readonly resource: vscode.Uri,
+    public readonly resource: vscode.Uri, // <-- CAMBIADO A 'public'
     private readonly webviewEditor: vscode.WebviewPanel
   ) {
     super();
@@ -38,25 +36,6 @@ export class PdfPreview extends Disposable {
               'default',
               webviewEditor.viewColumn
             );
-            break;
-          }
-          case 'deletePage': {
-            // 'this.resource' contiene la URI del PDF actual.
-            const uri = this.resource;
-            fsPromises.readFile(uri.fsPath).then(async (pdfBytes) => {
-                const pdfDoc = await PDFDocument.load(pdfBytes);
-                if (pdfDoc.getPageCount() > 1) {
-                    pdfDoc.removePage(message.pageNumber - 1);
-                    const pdfBytesSaved = await pdfDoc.save();
-                    await fsPromises.writeFile(uri.fsPath, pdfBytesSaved);
-                    // Esto recarga el visor para mostrar el cambio
-                    vscode.commands.executeCommand('workbench.action.files.revert');
-                } else {
-                    vscode.window.showErrorMessage('Cannot delete the last page of a PDF.');
-                }
-            }).catch(err => {
-                vscode.window.showErrorMessage(`Failed to delete page: ${err.message}`);
-            });
             break;
           }
         }
@@ -116,6 +95,7 @@ export class PdfPreview extends Disposable {
   }
 
   private getWebviewContents(): string {
+    // ... (El método getWebviewContents se queda exactamente como lo tenías)
     const webview = this.webviewEditor.webview;
     const docPath = webview.asWebviewUri(this.resource);
     const cspSource = webview.cspSource;
