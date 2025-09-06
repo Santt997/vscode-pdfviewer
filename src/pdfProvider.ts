@@ -1,3 +1,5 @@
+import { promises as fsPromises } from 'fs';
+import { PDFDocument } from 'pdf-lib';
 import * as vscode from 'vscode';
 import { PdfPreview } from './pdfPreview';
 

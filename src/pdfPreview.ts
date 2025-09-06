@@ -1,3 +1,5 @@
+import { promises as fsPromises } from 'fs';
+import { PDFDocument } from 'pdf-lib';
 import * as path from 'path';
 import * as vscode from 'vscode';
 import { Disposable } from './disposable';
@@ -39,7 +41,22 @@ export class PdfPreview extends Disposable {
             break;
           }
           case 'deletePage': {
-            vscode.commands.executeCommand('pdfviewer.deletePage', message.page);
+            // 'this.resource' contiene la URI del PDF actual.
+            const uri = this.resource;
+            fsPromises.readFile(uri.fsPath).then(async (pdfBytes) => {
+                const pdfDoc = await PDFDocument.load(pdfBytes);
+                if (pdfDoc.getPageCount() > 1) {
+                    pdfDoc.removePage(message.pageNumber - 1);
+                    const pdfBytesSaved = await pdfDoc.save();
+                    await fsPromises.writeFile(uri.fsPath, pdfBytesSaved);
+                    // Esto recarga el visor para mostrar el cambio
+                    vscode.commands.executeCommand('workbench.action.files.revert');
+                } else {
+                    vscode.window.showErrorMessage('Cannot delete the last page of a PDF.');
+                }
+            }).catch(err => {
+                vscode.window.showErrorMessage(`Failed to delete page: ${err.message}`);
+            });
             break;
           }
         }
