@@ -10,14 +10,9 @@ export function activate(context: vscode.ExtensionContext): void {
   const provider = new PdfCustomProvider(extensionRoot);
   context.subscriptions.push(
     vscode.window.registerCustomEditorProvider(
-      PdfCustomProvider.viewType,
+      'pdf.preview',
       provider,
-      {
-        webviewOptions: {
-          enableFindWidget: false, // default
-          retainContextWhenHidden: true,
-        },
-      }
+        { webviewOptions: { retainContextWhenHidden: true } }
     )
   );
 
