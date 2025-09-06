@@ -13,14 +13,14 @@
     
     // Configuración para PDF Viewer
     "workbench.editorAssociations": {
-        "*.pdf": "pdfviewer"
+        "*.pdf": "pdf.preview"
     },
-    "pdfviewer.autoOpen": true,
-    "pdfviewer.enabled": true,
-    "pdfviewer.scrollMode": 0,
-    "pdfviewer.spreadMode": 0,
-    "pdfviewer.backgroundColor": "#ffffff",
-    "pdfviewer.zoomLevel": "auto",
+    "pdf-preview.default.autoOpen": true,
+    "pdf-preview.default.enabled": true,
+    "pdf-preview.scrollMode": 0,
+    "pdf-preview.spreadMode": 0,
+    "pdf-preview.default.backgroundColor": "#ffffff",
+    "pdf-preview.default.zoomLevel": "auto",
     
     // Configuraciones adicionales recomendadas
     "editor.fontSize": 14,
