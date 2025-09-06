@@ -18,8 +18,44 @@ export function activate(context: vscode.ExtensionContext): void {
 
   // Comando para borrar página
   context.subscriptions.push(
-    vscode.commands.registerCommand('pdfviewer.deletePage', async (pageFromWebview?: number) => {
-      const activeEditor = vscode.window.activeTextEditor;
+            vscode.commands.registerCommand('pdfviewer.deletePage', async (pageFromWebview?: number) => {
+        console.log('=== DEBUG: Iniciando comando deletePage ===');
+        
+        // Log todos los editores visibles
+        console.log('Visible Text Editors:', vscode.window.visibleTextEditors.length);
+        vscode.window.visibleTextEditors.forEach((editor, index) => {
+            console.log(`Editor ${index}:`, editor.document.fileName, editor.document.uri.toString());
+        });
+        
+        // Verificar si hay custom editors
+        console.log('Active Custom Editor:', (vscode.window as any).activeCustomEditor);
+        
+        // Estrategia alternativa: buscar archivos PDF abiertos
+        const allDocuments = vscode.workspace.textDocuments;
+        const pdfDocuments = allDocuments.filter(doc => doc.fileName.toLowerCase().endsWith('.pdf'));
+        console.log('PDF Documents:', pdfDocuments.length);
+        pdfDocuments.forEach((doc, index) => {
+            console.log(`PDF ${index}:`, doc.fileName);
+        });
+        
+        if (pdfDocuments.length === 0) {
+            vscode.window.showErrorMessage('No hay un PDF activo. Abre un archivo PDF primero.');
+            return;
+        }
+        console.log('?? Comando deletePage ejecutado');
+        
+        // Buscar entre todos los editores visibles
+        const pdfEditors = vscode.window.visibleTextEditors.filter(editor => 
+            editor.document.fileName.toLowerCase().endsWith('.pdf')
+        );
+        
+        if (pdfEditors.length === 0) {
+            vscode.window.showErrorMessage('No hay un PDF activo. Abre un archivo PDF primero.');
+            return;
+        }
+
+        const activeEditor = pdfEditors[0]; // Tomar el primer PDF encontrado
+        console.log('PDF encontrado:', activeEditor.document.uri.toString());
       if (
         !activeEditor ||
         !activeEditor.document.fileName.toLowerCase().endsWith('.pdf')
@@ -28,7 +64,7 @@ export function activate(context: vscode.ExtensionContext): void {
         return;
       }
   
-      let pageNum = pageFromWebview;
+      let pageNum = pageFromWebview || undefined;
       if (!pageNum) {
         const pageStr = await vscode.window.showInputBox({
           prompt: '¿Qué página deseas borrar? (número, empezando desde 1)',
