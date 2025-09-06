@@ -16,13 +16,14 @@ export function activate(context: vscode.ExtensionContext): void {
 
   context.subscriptions.push(
     vscode.commands.registerCommand('pdfviewer.deletePage', async () => {
-      // 1. Obtener el PDF activo
-      const activeEditor = vscode.window.activeCustomEditor;
-      if (!activeEditor || activeEditor.viewType !== 'pdf.preview') {
+      // 1. Obtener el PDF activo desde nuestro Provider
+      const activePreview = PdfCustomProvider.activePreview;
+      if (!activePreview) {
         vscode.window.showErrorMessage('No active PDF preview found. Please open a PDF file.');
         return;
       }
-      const targetPath = activeEditor.document.uri.fsPath;
+      // La URI está dentro del objeto PdfPreview
+      const targetPath = activePreview.resource.fsPath;
 
       // 2. Pedir el número de página
       const pageStr = await vscode.window.showInputBox({
@@ -31,7 +32,7 @@ export function activate(context: vscode.ExtensionContext): void {
           return /^\d+$/.test(text) && parseInt(text, 10) > 0 ? null : 'Please enter a valid positive number.';
         }
       });
-      if (!pageStr) { return; } // El usuario canceló
+      if (!pageStr) { return; }
       const pageNum = parseInt(pageStr, 10);
 
       // 3. Procesar la eliminación
@@ -54,7 +55,6 @@ export function activate(context: vscode.ExtensionContext): void {
         
         vscode.window.showInformationMessage(`Page ${pageNum} deleted successfully.`);
         
-        // Recargar el visor
         await vscode.commands.executeCommand('workbench.action.files.revert');
 
       } catch (e) {
