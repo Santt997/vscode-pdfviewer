@@ -23,7 +23,8 @@
     "url": "https://github.com/tomoki1207/vscode-pdfviewer/issues"
   },
   "activationEvents": [
-    "onCustomEditor:pdf.preview"
+    "onCustomEditor:pdf.preview",
+    "onCommand:pdfviewer.deletePage"
   ],
   "main": "./out/src/extension",
   "contributes": {
@@ -41,6 +42,12 @@
             "filenamePattern": "*.pdf"
           }
         ]
+      }
+    ],
+    "commands": [
+      {
+        "command": "pdfviewer.deletePage",
+        "title": "Delete PDF Page"
       }
     ],
     "configuration": {
@@ -100,7 +107,8 @@
     "package": "vsce package"
   },
   "dependencies": {
-    "@types/vscode": "^1.46.0"
+    "@types/vscode": "^1.46.0",
+    "pdf-lib": "^1.17.1"
   },
   "devDependencies": {
     "@types/mocha": "^10.0.1",
