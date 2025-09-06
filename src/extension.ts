@@ -16,86 +16,61 @@ export function activate(context: vscode.ExtensionContext): void {
     )
   );
 
-  // Comando para borrar pÃ¡gina
+  // Comando para borrar página - Versión corregida
   context.subscriptions.push(
-            vscode.commands.registerCommand('pdfviewer.deletePage', async (pageFromWebview?: number) => {
-        console.log('=== DEBUG: Iniciando comando deletePage ===');
-        
-        // Log todos los editores visibles
-        console.log('Visible Text Editors:', vscode.window.visibleTextEditors.length);
-        vscode.window.visibleTextEditors.forEach((editor, index) => {
-            console.log(`Editor ${index}:`, editor.document.fileName, editor.document.uri.toString());
-        });
-        
-        // Verificar si hay custom editors
-        console.log('Active Custom Editor:', (vscode.window as any).activeCustomEditor);
-        
-        // Estrategia alternativa: buscar archivos PDF abiertos
-        const allDocuments = vscode.workspace.textDocuments;
-        const pdfDocuments = allDocuments.filter(doc => doc.fileName.toLowerCase().endsWith('.pdf'));
-        console.log('PDF Documents:', pdfDocuments.length);
-        pdfDocuments.forEach((doc, index) => {
-            console.log(`PDF ${index}:`, doc.fileName);
-        });
-        
-        if (pdfDocuments.length === 0) {
-            vscode.window.showErrorMessage('No hay un PDF activo. Abre un archivo PDF primero.');
-            return;
-        }
-        console.log('?? Comando deletePage ejecutado');
-        
-        // Buscar entre todos los editores visibles
-        const pdfEditors = vscode.window.visibleTextEditors.filter(editor => 
-            editor.document.fileName.toLowerCase().endsWith('.pdf')
+    vscode.commands.registerCommand('pdfviewer.deletePage', async (pageFromWebview?: number, filePath?: string) => {
+      console.log(' Delete page command executed');
+      console.log('File path from webview:', filePath);
+      
+      // Determinar la ruta del PDF
+      let targetPath = filePath;
+      
+      if (!targetPath) {
+        // Buscar entre documentos PDF abiertos
+        const pdfDocs = vscode.workspace.textDocuments.filter(doc => 
+          doc.fileName.toLowerCase().endsWith('.pdf')
         );
         
-        if (pdfEditors.length === 0) {
-            vscode.window.showErrorMessage('No hay un PDF activo. Abre un archivo PDF primero.');
-            return;
+        if (pdfDocs.length === 0) {
+          vscode.window.showErrorMessage('No hay un PDF activo. Abre un archivo PDF primero.');
+          return;
         }
-
-        const activeEditor = pdfEditors[0]; // Tomar el primer PDF encontrado
-        console.log('PDF encontrado:', activeEditor.document.uri.toString());
-      if (
-        !activeEditor ||
-        !activeEditor.document.fileName.toLowerCase().endsWith('.pdf')
-      ) {
-        vscode.window.showErrorMessage('No hay un PDF activo.');
-        return;
+        targetPath = pdfDocs[0].fileName;
       }
-  
-      let pageNum = pageFromWebview || undefined;
+      
+      console.log('Processing PDF:', targetPath);
+
+      // Obtener número de página
+      let pageNum = pageFromWebview;
       if (!pageNum) {
         const pageStr = await vscode.window.showInputBox({
-          prompt: 'Â¿QuÃ© pÃ¡gina deseas borrar? (nÃºmero, empezando desde 1)',
+          prompt: '¿Qué página deseas borrar? (número, empezando desde 1)',
         });
         if (!pageStr) return;
         pageNum = parseInt(pageStr, 10);
         if (isNaN(pageNum)) {
-          vscode.window.showErrorMessage('NÃºmero invÃ¡lido.');
+          vscode.window.showErrorMessage('Número inválido.');
           return;
         }
       }
-  
-      const originalPath = activeEditor.document.fileName;
+
+      // Procesar la eliminación
       const tempPath = path.join(
-        path.dirname(originalPath),
-        `.__tmp__${path.basename(originalPath)}`
+        path.dirname(targetPath),
+        `.__tmp__${path.basename(targetPath)}`
       );
-  
+
       try {
-        await deletePdfPage(originalPath, pageNum, tempPath);
-        // Reemplaza el archivo original
-        fs.copyFileSync(tempPath, originalPath);
+        await deletePdfPage(targetPath, pageNum, tempPath);
+        fs.copyFileSync(tempPath, targetPath);
         fs.unlinkSync(tempPath);
-        vscode.window.showInformationMessage(`PÃ¡gina ${pageNum} borrada correctamente.`);
-        // Recarga el documento
-        await activeEditor.document.save();
+        vscode.window.showInformationMessage(`Página ${pageNum} borrada correctamente.`);
         await vscode.commands.executeCommand('workbench.action.files.revert');
       } catch (e) {
-        vscode.window.showErrorMessage('Error: ' + e.message);
+        vscode.window.showErrorMessage('Error: ' + (e as Error).message);
       }
     })
   );
 }
+
 export function deactivate(): void {}
