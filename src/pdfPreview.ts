@@ -354,9 +354,6 @@ export class PdfPreview extends Disposable {
                   <span data-l10n-id="toggle_sidebar_label">Toggle Sidebar</span>
                 </button>
                 <div class="toolbarButtonSpacer"></div>
-                <button id="deletePageButton" class="toolbarButton" title="Delete Current Page" tabindex="1001">
-                  <span>🗑️</span>
-                </button>
                 <button id="viewFind" class="toolbarButton" title="Find in Document" tabindex="12" data-l10n-id="findbar" aria-expanded="false" aria-controls="findbar">
                   <span data-l10n-id="findbar_label">Find</span>
                 </button>
