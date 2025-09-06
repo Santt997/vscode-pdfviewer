@@ -22,10 +22,6 @@
   "bugs": {
     "url": "https://github.com/tomoki1207/vscode-pdfviewer/issues"
   },
-  "activationEvents": [
-    "onCustomEditor:pdf.preview",
-    "onCommand:pdfviewer.deletePage"
-  ],
   "main": "./out/src/extension",
   "contributes": {
     "capabilities": {
