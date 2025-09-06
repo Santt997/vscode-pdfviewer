@@ -76,7 +76,7 @@ export class PdfPreview extends Disposable {
     this.update();
   }
 
-  private reload(): void {
+  public reload(): void {
     if (this._previewState !== 'Disposed') {
       this.webviewEditor.webview.postMessage({ type: 'reload' });
     }

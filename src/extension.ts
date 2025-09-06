@@ -100,7 +100,7 @@ export function activate(context: vscode.ExtensionContext): void {
         
         vscode.window.showInformationMessage(`Page(s) ${pageStr} deleted successfully.`);
         
-        await vscode.commands.executeCommand('workbench.action.files.revert');
+        activePreview.reload();
 
       } catch (e) {
         vscode.window.showErrorMessage('Error deleting pages: ' + (e as Error).message);
