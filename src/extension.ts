@@ -61,10 +61,10 @@ export function activate(context: vscode.ExtensionContext): void {
         // Recarga el documento
         await activeEditor.document.save();
         await vscode.commands.executeCommand('workbench.action.files.revert');
-      } catch (e: any) {
+      } catch (e) {
         vscode.window.showErrorMessage('Error: ' + e.message);
       }
     })
   );
-
+}
 export function deactivate(): void {}
