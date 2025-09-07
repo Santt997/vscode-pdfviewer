@@ -123,5 +123,9 @@
   },
   "extensionKind": [
     "ui"
+  ],
+  "activationEvents": [
+    "onCommand:pdf-viewer.open",
+    "onCustomEditor:pdf-viewer.pdfedit"
   ]
 }
