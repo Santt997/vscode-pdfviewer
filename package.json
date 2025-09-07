@@ -1,9 +1,9 @@
 {
-  "name": "pdf",
-  "displayName": "vscode-pdf",
+  "name": "pdf-plus",
+  "displayName": "vscode-pdf-plus",
   "description": "Display pdf file in VSCode.",
   "version": "1.2.2",
-  "publisher": "tomoki1207",
+  "publisher": "Sant1997",
   "engines": {
     "vscode": "^1.103.0"
   },
