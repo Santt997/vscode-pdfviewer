@@ -17,10 +17,10 @@
   "icon": "vscode-pdf.png",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tomoki1207/vscode-pdfviewer.git"
+    "url": "https://github.com/Santt997/vscode-pdfviewer-plus"
   },
   "bugs": {
-    "url": "https://github.com/tomoki1207/vscode-pdfviewer/issues"
+    "url": "https://github.com/Santt997/vscode-pdfviewer-plus/issues"
   },
   "main": "./out/src/extension",
   "contributes": {
