@@ -3,7 +3,7 @@
   "displayName": "vscode-pdf-plus",
   "description": "Display pdf file in VSCode.",
   "version": "1.2.2",
-  "publisher": "Sant1997",
+  "publisher": "Santt1997",
   "engines": {
     "vscode": "^1.103.0"
   },
