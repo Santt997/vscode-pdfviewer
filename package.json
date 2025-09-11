@@ -2,10 +2,10 @@
   "name": "pdf-plus-my-viewer",
   "displayName": "pdf-plus-my-viewer - Santt997",
   "description": "Display pdf file in VSCode.",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "publisher": "Santt997",
   "engines": {
-    "vscode": "*"
+    "vscode": "^1.0.0"
   },
   "categories": [
     "Programming Languages"
