@@ -431,11 +431,9 @@ See https://github.com/adobe-type-tools/cmap-resources
     <input type="file" id="fileInput" class="hidden">
   </body>
   <style>
-  .pdfViewer .page canvas,
-  .pdfViewer .page .canvasWrapper,
-  .pdfViewer .page {
-    filter: invert(1) hue-rotate(180deg) !important;
-  }
+    .pdfViewer .page canvas {
+        filter: invert(1) hue-rotate(180deg) saturate(2.5) !important;
+    }
 </style>
 </html>
 
