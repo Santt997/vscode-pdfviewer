@@ -26,10 +26,10 @@ importers:
         version: 1.103.0
       '@typescript-eslint/eslint-plugin':
         specifier: 2.28.0
-        version: 2.28.0(@typescript-eslint/parser@2.28.0(eslint@6.8.0)(typescript@5.0.4))(eslint@6.8.0)(typescript@5.0.4)
+        version: 2.28.0(@typescript-eslint/parser@2.28.0(eslint@6.8.0)(typescript@5.9.2))(eslint@6.8.0)(typescript@5.9.2)
       '@typescript-eslint/parser':
         specifier: 2.28.0
-        version: 2.28.0(eslint@6.8.0)(typescript@5.0.4)
+        version: 2.28.0(eslint@6.8.0)(typescript@5.9.2)
       eslint:
         specifier: 6.8.0
         version: 6.8.0
@@ -49,8 +49,8 @@ importers:
         specifier: 2.0.4
         version: 2.0.4
       typescript:
-        specifier: 5.0.4
-        version: 5.0.4
+        specifier: 5.9.2
+        version: 5.9.2
       vsce:
         specifier: 2.15.0
         version: 2.15.0
@@ -1275,9 +1275,9 @@ packages:
   typed-rest-client@1.8.11:
     resolution: {integrity: sha512-5UvfMpd1oelmUPRbbaVnq+rHP7ng2cE4qoQkQeAqxRL6PklkxsM0g32/HL0yfvruK6ojQ5x8EE+HF4YV6DtuCA==}
 
-  typescript@5.0.4:
-    resolution: {integrity: sha512-cW9T5W9xY37cc+jfEnaUvX91foxtHkza3Nw3wkoF4sSlKn0MONdkdEndig/qPBWXNkmplh3NzayQzCiHM4/hqw==}
-    engines: {node: '>=12.20'}
+  typescript@5.9.2:
+    resolution: {integrity: sha512-CWBzXQrc/qOkhidw1OzBTQuYRbfyxDXJMVJ1XNwUHGROVmuaeiEm3OslpZ1RV96d7SKKjZKrSJu3+t/xlw3R9A==}
+    engines: {node: '>=14.17'}
     hasBin: true
 
   uc.micro@1.0.6:
@@ -1441,23 +1441,23 @@ snapshots:
 
   '@types/vscode@1.103.0': {}
 
-  '@typescript-eslint/eslint-plugin@2.28.0(@typescript-eslint/parser@2.28.0(eslint@6.8.0)(typescript@5.0.4))(eslint@6.8.0)(typescript@5.0.4)':
+  '@typescript-eslint/eslint-plugin@2.28.0(@typescript-eslint/parser@2.28.0(eslint@6.8.0)(typescript@5.9.2))(eslint@6.8.0)(typescript@5.9.2)':
     dependencies:
-      '@typescript-eslint/experimental-utils': 2.28.0(eslint@6.8.0)(typescript@5.0.4)
-      '@typescript-eslint/parser': 2.28.0(eslint@6.8.0)(typescript@5.0.4)
+      '@typescript-eslint/experimental-utils': 2.28.0(eslint@6.8.0)(typescript@5.9.2)
+      '@typescript-eslint/parser': 2.28.0(eslint@6.8.0)(typescript@5.9.2)
       eslint: 6.8.0
       functional-red-black-tree: 1.0.1
       regexpp: 3.2.0
-      tsutils: 3.21.0(typescript@5.0.4)
+      tsutils: 3.21.0(typescript@5.9.2)
     optionalDependencies:
-      typescript: 5.0.4
+      typescript: 5.9.2
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/experimental-utils@2.28.0(eslint@6.8.0)(typescript@5.0.4)':
+  '@typescript-eslint/experimental-utils@2.28.0(eslint@6.8.0)(typescript@5.9.2)':
     dependencies:
       '@types/json-schema': 7.0.15
-      '@typescript-eslint/typescript-estree': 2.28.0(typescript@5.0.4)
+      '@typescript-eslint/typescript-estree': 2.28.0(typescript@5.9.2)
       eslint: 6.8.0
       eslint-scope: 5.1.1
       eslint-utils: 2.1.0
@@ -1465,19 +1465,19 @@ snapshots:
       - supports-color
       - typescript
 
-  '@typescript-eslint/parser@2.28.0(eslint@6.8.0)(typescript@5.0.4)':
+  '@typescript-eslint/parser@2.28.0(eslint@6.8.0)(typescript@5.9.2)':
     dependencies:
       '@types/eslint-visitor-keys': 1.0.0
-      '@typescript-eslint/experimental-utils': 2.28.0(eslint@6.8.0)(typescript@5.0.4)
-      '@typescript-eslint/typescript-estree': 2.28.0(typescript@5.0.4)
+      '@typescript-eslint/experimental-utils': 2.28.0(eslint@6.8.0)(typescript@5.9.2)
+      '@typescript-eslint/typescript-estree': 2.28.0(typescript@5.9.2)
       eslint: 6.8.0
       eslint-visitor-keys: 1.3.0
     optionalDependencies:
-      typescript: 5.0.4
+      typescript: 5.9.2
     transitivePeerDependencies:
       - supports-color
 
-  '@typescript-eslint/typescript-estree@2.28.0(typescript@5.0.4)':
+  '@typescript-eslint/typescript-estree@2.28.0(typescript@5.9.2)':
     dependencies:
       debug: 4.4.3
       eslint-visitor-keys: 1.3.0
@@ -1485,9 +1485,9 @@ snapshots:
       is-glob: 4.0.3
       lodash: 4.17.21
       semver: 6.3.1
-      tsutils: 3.21.0(typescript@5.0.4)
+      tsutils: 3.21.0(typescript@5.9.2)
     optionalDependencies:
-      typescript: 5.0.4
+      typescript: 5.9.2
     transitivePeerDependencies:
       - supports-color
 
@@ -2609,10 +2609,10 @@ snapshots:
 
   tslib@1.14.1: {}
 
-  tsutils@3.21.0(typescript@5.0.4):
+  tsutils@3.21.0(typescript@5.9.2):
     dependencies:
       tslib: 1.14.1
-      typescript: 5.0.4
+      typescript: 5.9.2
 
   tunnel-agent@0.6.0:
     dependencies:
@@ -2634,7 +2634,7 @@ snapshots:
       tunnel: 0.0.6
       underscore: 1.13.7
 
-  typescript@5.0.4: {}
+  typescript@5.9.2: {}
 
   uc.micro@1.0.6: {}
 
