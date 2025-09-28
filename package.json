@@ -106,7 +106,6 @@
     "pdf-lib": "1.17.1"
   },
   "devDependencies": {
-    "@types/glob": "^9.0.0",
     "@types/mocha": "10.0.1",
     "@types/node": "12.12.21",
     "@types/vscode": "1.103.0",

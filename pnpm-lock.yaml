@@ -12,9 +12,6 @@ importers:
         specifier: 1.17.1
         version: 1.17.1
     devDependencies:
-      '@types/glob':
-        specifier: ^9.0.0
-        version: 9.0.0
       '@types/mocha':
         specifier: 10.0.1
         version: 10.0.1
@@ -91,10 +88,6 @@ packages:
 
   '@types/eslint-visitor-keys@1.0.0':
     resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
-
-  '@types/glob@9.0.0':
-    resolution: {integrity: sha512-00UxlRaIUvYm4R4W9WYkN8/J+kV8fmOQ7okeH6YFtGWFMt3odD45tpG5yA5wnL7HE6lLgjaTW5n14ju2hl2NNA==}
-    deprecated: This is a stub types definition. glob provides its own type definitions, so you do not need this installed.
 
   '@types/json-schema@7.0.15':
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
@@ -1428,10 +1421,6 @@ snapshots:
       pako: 1.0.11
 
   '@types/eslint-visitor-keys@1.0.0': {}
-
-  '@types/glob@9.0.0':
-    dependencies:
-      glob: 11.0.3
 
   '@types/json-schema@7.0.15': {}
 
